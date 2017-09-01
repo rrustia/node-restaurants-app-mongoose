@@ -26,6 +26,7 @@ function seedRestaurantData() {
     seedData.push(generateRestaurantData());
   }
   // this will return a promise
+  console.log('seedData is ', seedData);
   return Restaurant.insertMany(seedData);
 }
 
@@ -123,7 +124,10 @@ describe('Restaurants API resource', function() {
           res = _res;
           res.should.have.status(200);
           // otherwise our db seeding didn't work
+          // console.log(res.body);
+          console.log('res.body.restaurants type is', typeof(res.body.restaurants));
           res.body.restaurants.should.have.length.of.at.least(1);
+          // console.log('Restaurant.count() is ', Restaurant.count());
           return Restaurant.count();
         })
         .then(function(count) {
